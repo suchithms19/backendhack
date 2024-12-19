@@ -3,20 +3,19 @@ const mongoose = require('mongoose');
 const voiceIncidentSchema = new mongoose.Schema({
   phoneNumber: {
     type: String,
-    required: true
+    default: 'unknown'
   },
   transcription: {
     type: String,
-    required: true
+    default: 'pending'
   },
   recordingUrl: {
     type: String,
-    required: true
+    default: 'pending'
   },
   callSid: {
     type: String,
-    required: true,
-    unique: true
+    required: true
   },
   duration: {
     type: Number,
@@ -34,17 +33,20 @@ const voiceIncidentSchema = new mongoose.Schema({
     }
   },
   extractedLocation: {
-    type: String
+    type: String,
+    default: ''
   },
   status: {
     type: String,
-    enum: ['new', 'processing', 'resolved'],
+    enum: ['new', 'recording_complete', 'completed', 'error'],
     default: 'new'
   },
   timestamp: {
     type: Date,
     default: Date.now
   }
+}, {
+  timestamps: true
 });
 
 module.exports = mongoose.model('VoiceIncident', voiceIncidentSchema); 
