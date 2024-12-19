@@ -37,7 +37,6 @@ const incidentSchema = new mongoose.Schema({
     assignedWorkers: [{
       type: {
         type: String,
-        required: true
       },
       status: {
         type: String,
