@@ -22,12 +22,29 @@ const incidentSchema = new mongoose.Schema({
   },
   status: {
     type: String,
-    enum: ['new', 'analyzing', 'handled'],
+    enum: ['new', 'analyzing', 'assigned', 'handled'],
     default: 'new'
   },
-  aiAnalysis: {
-    type: String,
-    default: null
+  analysis: {
+    victimInstructions: {
+      type: [String],
+      default: []
+    },
+    operatorInstructions: {
+      type: [String],
+      default: []
+    },
+    assignedWorkers: [{
+      type: {
+        type: String,
+        required: true
+      },
+      status: {
+        type: String,
+        enum: ['pending', 'enroute', 'onsite', 'completed'],
+        default: 'pending'
+      }
+    }]
   }
 });
 
