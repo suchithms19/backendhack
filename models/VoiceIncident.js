@@ -13,6 +13,15 @@ const voiceIncidentSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  callSid: {
+    type: String,
+    required: true,
+    unique: true
+  },
+  duration: {
+    type: Number,
+    default: 0
+  },
   location: {
     type: {
       type: String,
@@ -24,14 +33,17 @@ const voiceIncidentSchema = new mongoose.Schema({
       default: [0, 0]
     }
   },
-  timestamp: {
-    type: Date,
-    default: Date.now
+  extractedLocation: {
+    type: String
   },
   status: {
     type: String,
     enum: ['new', 'processing', 'resolved'],
     default: 'new'
+  },
+  timestamp: {
+    type: Date,
+    default: Date.now
   }
 });
 
